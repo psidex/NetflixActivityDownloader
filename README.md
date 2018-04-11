@@ -1,6 +1,8 @@
 # NetflixStats
 
-A small javascript script that can extract information about your watch history
+A collection of tools that can extract and visualise your Netflix watch history
+
+Currently just 1 javascript bookmarklet, but more is planned.
 
 # Usage
 
