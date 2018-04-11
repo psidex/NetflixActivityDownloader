@@ -39,6 +39,10 @@ A small javascript script that can extract information about your watch history
                 "duration": 1469
             }
         }
-    },
+    }
 }
 ```
+
+# WARNING
+
+I am not aware of how Netflix handle their internal APIs, I do not know if there are rate limits or specific usage conditions. I am not responsible for any consequences of using this software, such as if you get banned from their services.
