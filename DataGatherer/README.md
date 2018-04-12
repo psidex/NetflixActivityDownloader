@@ -21,18 +21,20 @@ Use of this software may constitute a breach in the [Netflix Terms of Use](https
 ```json
 {
     "viewedItems": {
-        "80186848": {
-            "title": "Jack Whitehall: Travels with My Father",
+        "70136112": {
+            "title": "The Office (U.K.)",
             "type": "series",
             "watchCount": 2,
-            "watches": {
-                "Season 1: \"Episode 6\"": {
-                    "dateWatched": "17/02/2018",
-                    "duration": 1805
+            "watchedEpisodes": {
+                "70075284": {
+                    "title": "Series 1: \"Downsize\"",
+                    "dateWatched": "19/03/2018",
+                    "duration": 1804
                 },
-                "Season 1: \"Episode 5\"": {
-                    "dateWatched": "17/02/2018",
-                    "duration": 1931
+                "70075285": {
+                    "title": "Series 1: \"Work Experience\"",
+                    "dateWatched": "23/03/2018",
+                    "duration": 1764
                 }
             }
         },
@@ -55,3 +57,6 @@ Use of this software may constitute a breach in the [Netflix Terms of Use](https
     }
 }
 ```
+
+ - The keys in `viewedItems` are the unique ID for the film / series as a whole, and the keys in `watchedEpisodes` are the individual episode IDs
+ - This structure was chosen so that there is not chance of the keys conflicting, which would happen if something like the titles were used, as 2 episodes / films can have the same title

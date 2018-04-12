@@ -87,7 +87,7 @@ function gatherWatchInfo(callback) {
 
                 // Get some details about the episode watched if it is part of a series (not a film)
                 if (generalType == "series") {
-                    var episodeObj = {"dateWatched": episodeData.dateStr, "duration": episodeData.duration};
+                    var episodeObj = {"title": episodeData.title, "dateWatched": episodeData.dateStr, "duration": episodeData.duration};
                 }
 
                 // If not in flixStats object
@@ -99,7 +99,8 @@ function gatherWatchInfo(callback) {
                     
                     if (generalType == "series") {
                         flixStats.viewedItems[generalID].watchCount = 1;  // No repeated data so films will only ever be watched once
-                        flixStats.viewedItems[generalID].watches = {[episodeData.title]: episodeObj};
+                        // For series movieID will be the individual episodes ID
+                        flixStats.viewedItems[generalID].watchedEpisodes = {[episodeData.movieID]: episodeObj};
                     } else {
                         flixStats.viewedItems[generalID].dateWatched = episodeData.dateStr;
                         flixStats.viewedItems[generalID].duration = episodeData.duration;
@@ -108,7 +109,7 @@ function gatherWatchInfo(callback) {
                 } else {
                     // Update data - Netflix doesen't track repeated watches so only type=="series" will be changed here
                     flixStats.viewedItems[generalID].watchCount++;
-                    flixStats.viewedItems[generalID].watches[episodeData.title] = episodeObj;
+                    flixStats.viewedItems[generalID].watchedEpisodes[episodeData.movieID] = episodeObj;
                 }
                 
                 console.log("Parsed: " + generalTitle);
