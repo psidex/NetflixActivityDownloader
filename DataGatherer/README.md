@@ -8,8 +8,12 @@ Use of this software may constitute a breach in the [Netflix Terms of Use](https
 
 # Usage
 
- - Go [here](https://raw.githubusercontent.com/thatguywiththatname/NetflixStats/master/DataGatherer/minified/main.js)
- - Press `CTRL+A` and then `CTRL+C` to highlight the code and copy it
+ - Highlight and copy **ALL** the code below
+
+ ```javascript
+javascript:var script=document.createElement("script");script.src="https://thatguywiththatname.github.io/NetflixStats/DataGatherer/source/main.js",script.type="application/javascript",document.getElementsByTagName("head")[0].appendChild(script);void 0
+```
+
  - Create a new bookmark in your browser, and where the URL goes, paste the code in
  - Name the bookmark whatever you want, maybe "NetflixStatsDownload"
  - Go to [your Netflix viewing activity](https://www.netflix.com/viewingactivity) 

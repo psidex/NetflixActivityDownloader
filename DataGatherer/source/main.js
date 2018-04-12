@@ -6,7 +6,8 @@ function getJSON(url, callback) {
             try {
                 var data = JSON.parse(xmlhttp.responseText);
             } catch(err) {
-                alert(err.message + " in " + xmlhttp.responseText);
+                alert("Netflix Stats gathering failed, see console for details");
+                console.warn(err.message + " in " + xmlhttp.responseText);
                 return;
             }
             callback(data);
