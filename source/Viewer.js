@@ -20,52 +20,56 @@ h1 {
 }
 </style>`;
 
+
+
+/* Process stats */
+// {seriesName: secondsWatched}
+var nameToWatched = {};
+
+// Populate nameToWatched
+for (var itemID in flixStats.viewedItems) {
+    var item = flixStats.viewedItems[itemID]
+    if (item.type == "film") {
+        nameToWatched[item.title] = item.duration;
+    } else {
+        nameToWatched[item.title] = 0;
+        for (var epID in item.watchedEpisodes) {
+            ep = item.watchedEpisodes[epID];
+            nameToWatched[item.title] += ep.duration;
+        }
+    }
+}
+
+var totalSecondsWatched = 0;
+for (var property in nameToWatched) totalSecondsWatched += nameToWatched[property]; console.log(totalSecondsWatched);
+/* END Process stats */
+
+
+
+/* Insert HTML */
 document.getElementsByClassName("bd")[0].innerHTML = '<div id="NetflixStats"></div>';
 document.getElementsByClassName("site-footer-wrapper")[0].innerHTML = "";
 var NetflixStatsObject = document.getElementById("NetflixStats");
 NetflixStatsObject.innerHTML = `<h1>Netflix Stats for ${flixStats.userDetails.name}</h1>`;
 NetflixStatsObject.innerHTML += `<p>Amount of different films / series viewed: ${Object.keys(flixStats.viewedItems).length}</p>`;
+NetflixStatsObject.innerHTML += `<p>Total time spent watching netflix: ${Math.round(totalSecondsWatched/60/60)} hours</p>`;
 NetflixStatsObject.innerHTML += '</br><h2>Top 5 Watched:</h2>';
 NetflixStatsObject.innerHTML += '<div class="chart-container"><canvas class="chart-contained" id="topWatchedChart"></canvas></div>';
+/* END Insert HTML */
 
 
 
-/* Process stats */
+/* Graph Stuff */
 
-var top5Names = ["empty", "empty", "empty", "empty", "empty"];
-var top5Times = [0, 0, 0, 0, 0];
+// Big thanks to https://stackoverflow.com/a/16794116
+var top5Names = Object.keys(nameToWatched).sort(function(a,b){return nameToWatched[a]-nameToWatched[b]});
+// Get biggest 5 and reverse so biggest is first
+top5Names = top5Names.slice(-5).reverse();
 
-// Returns the smallest number and its index in top5Times
-function smallestTop5Time() {
-    var min = Number.POSITIVE_INFINITY
-    var index = 0;
-    for (i = 0; i < top5Times.length; i++) {
-        if (Math.min(min, top5Times[i]) == top5Times[i]) {
-            min = top5Times[i];
-            index = i;
-        }
-    }
-    return {"time": min, "index": index};
-}
-
-// For each watched item, calculate the total watch duration, see if it is bigger than
-// the lowest value in top5Times. If it is, remove the lower one and push the new one to both arrays
-for (var itemID in flixStats.viewedItems) {
-    var totalDuration = 0;
-    var item = flixStats.viewedItems[itemID]
-
-    if (item.type == "film") totalDuration += item.duration;
-    else for (var epID in item.watchedEpisodes) totalDuration += item.watchedEpisodes[epID].duration;
-
-    totalDuration = totalDuration/60  // Convert seconds -> minutes
-
-    var lowestTimeInfo = smallestTop5Time();
-    if (totalDuration > lowestTimeInfo.time) {
-        top5Times.splice(lowestTimeInfo.index, 1);
-        top5Names.splice(lowestTimeInfo.index, 1);
-        top5Times.push(totalDuration)
-		top5Names.push(item.title)
-    }
+var top5Times = [];
+for (var index in top5Names) {
+    // Time in mins
+    top5Times.push((nameToWatched[top5Names[index]])/60);
 }
 
 var topWatchedChartctx = document.getElementById("topWatchedChart").getContext("2d");
