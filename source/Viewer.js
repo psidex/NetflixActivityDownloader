@@ -82,6 +82,13 @@ var topWatchedChart = new Chart(topWatchedChartctx, {
         }]
     },
     options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        },
         responsive:true,
         maintainAspectRatio: false
     }
