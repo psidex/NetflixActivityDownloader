@@ -16,16 +16,6 @@ function getJSON(url, callback) {
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 }
-
-// Thanks https://stackoverflow.com/a/34156339
-function downloadJSONToFile(content, fileName) {
-    content = JSON.stringify(content);
-    var a = document.createElement("a");
-    var file = new Blob([content], {type: "application/json"});
-    a.href = URL.createObjectURL(file);
-    a.download = fileName;
-    a.click();
-}
 /* END Util functions */
 
 
@@ -125,7 +115,6 @@ function gatherWatchInfo(callback) {
 gatherWatchInfo(() => {
     console.log("\nDone\n");
     console.log(flixStats);
-    // downloadJSONToFile(flixStats, "Netflix-Stats.json");
 
     // Fetch and run Viewer script to show user stats
     var script = document.createElement("script");
