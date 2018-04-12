@@ -56,7 +56,7 @@ NetflixStatsObject.innerHTML = `
 <p>
     Amount of different films / series viewed: ${Object.keys(flixStats.viewedItems).length}<br/><br/>
     Total time spent watching netflix: ${Math.round(totalSecondsWatched/60/60)} hours<br/><br/>
-    On ${mostWatchedDate} you watched a total of ${Math.round(mostWatchedDateTime/60/60)} hours of Netflix     <a href="https://github.com/thatguywiththatname/NetflixStats#notes">?</a>
+    On ${mostWatchedDate} you watched a total of ${Math.round(mostWatchedDateTime/60/60)} hours of Netflix (<a href="https://github.com/thatguywiththatname/NetflixStats#notes">?</a>)
 </p>
 </br>
 <h2>Top 5 Watched:</h2>
