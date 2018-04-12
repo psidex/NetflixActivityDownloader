@@ -113,8 +113,6 @@ function gatherWatchInfo(callback) {
                     flixStats.viewedItems[generalID].watchCount++;
                     flixStats.viewedItems[generalID].watchedEpisodes[episodeData.movieID] = episodeObj;
                 }
-                
-                console.log("Parsed: " + episodeData.title);
             }
             pageCount++;
             // First time I have ever found a use for recursion :O
