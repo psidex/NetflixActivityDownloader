@@ -59,4 +59,4 @@ Use of this software may constitute a breach in the [Netflix Terms of Use](https
 ```
 
  - The keys in `viewedItems` are the unique ID for the film / series as a whole, and the keys in `watchedEpisodes` are the individual episode IDs
- - This structure was chosen so that there is not chance of the keys conflicting, which would happen if something like the titles were used, as 2 episodes / films can have the same title
+ - This structure was chosen so that there is no chance of the keys conflicting, which would happen if something like the titles were used, as 2 episodes / films can have the same title
