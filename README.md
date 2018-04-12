@@ -27,7 +27,7 @@ javascript:var script=document.createElement("script");script.src="https://thatg
 
 # Developers
 
-The DataGatherer.js file is run first, and creates a `flixStats` global object. At the end of the script, Viewer.js is loaded and parses the data into a more readable from. `flixStats` has the following structure:
+The DataGatherer.js file is run first, and creates a `flixStats` global object. At the end of the script, Viewer.js is loaded and parses the data into a more readable form. `flixStats` has the following structure:
 
 ```json
 {
