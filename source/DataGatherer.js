@@ -1,3 +1,11 @@
+/* Pre Load */
+// Load the Chart.js library before doing anything
+var script = document.createElement("script");
+script.type = "application/javascript";
+script.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js";
+document.getElementsByTagName("head")[0].appendChild(script);
+/* END Pre Load */
+
 /* Util functions */
 function getJSON(url, callback) {
     var xmlhttp = new XMLHttpRequest();
@@ -103,7 +111,7 @@ function gatherWatchInfo(callback) {
                     flixStats.viewedItems[generalID].watchedEpisodes[episodeData.movieID] = episodeObj;
                 }
                 
-                console.log("Parsed: " + generalTitle);
+                console.log("Parsed: " + episodeData.title);
             }
             pageCount++;
             // First time I have ever found a use for recursion :O
