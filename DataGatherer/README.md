@@ -16,7 +16,7 @@ Use of this software may constitute a breach in the [Netflix Terms of Use](https
  - Open your browsers console so you can see what is going on (F12 for Chrome, then click the "Console" tab)
  - Click the bookmark
  - You should now see a bunch of output in the console as your browser gathers all the information. If any errors occur you should see them here
- - When it is done your browser should download a JSON file called "Netflix-Watch-Stats.json". This has the following structure:
+ - When it is done your browser should download a JSON file called "Netflix-Stats.json". This has the following structure:
 
 ```json
 {
