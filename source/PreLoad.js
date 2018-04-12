@@ -1,3 +1,15 @@
+/*
+ * PreLoad.js
+ * This is the first script that is run and does a few things:
+ * Pre-load the Chart.js library
+ * Insert custom CSS
+ * Insert & remove some HTML
+ * Show a loading symbol
+ * Call the next NetflixStats script
+*/
+
+
+
 // Load the Chart.js library before doing anything, so that it can be used later
 // without lag
 var script = document.createElement("script");
@@ -29,7 +41,6 @@ h1 {
     margin-right: auto;
 }
 </style>`;
-
 document.getElementsByClassName("bd")[0].innerHTML = '<div id="NetflixStats"><h1>Gathering Stats</h1><br/><img height="100" width="100" src="https://thatguywiththatname.github.io/NetflixStats/source/loader.gif"></div>';
 document.getElementsByClassName("site-footer-wrapper")[0].innerHTML = "";
 

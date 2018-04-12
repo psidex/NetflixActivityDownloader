@@ -1,3 +1,13 @@
+/*
+ * Viewer.js
+ * This is the third and final script, it:
+ * Performs some calculations on the flixStats data
+ * Inserts custom HTML into the NetflixStats div
+ * Draws the charts using the pre-loaded Chart.js library
+*/
+
+
+
 /* Process stats */
 // {seriesName: secondsWatched}
 var nameToWatched = {};
@@ -35,7 +45,7 @@ NetflixStatsObject.innerHTML += '<div class="chart-container"><canvas class="cha
 
 /* Graph Stuff */
 
-// Big thanks to https://stackoverflow.com/a/16794116
+// Not sure how this works... https://stackoverflow.com/a/16794116
 var top5Names = Object.keys(nameToWatched).sort(function(a,b){return nameToWatched[a]-nameToWatched[b]});
 // Get biggest 5 and reverse so biggest is first
 top5Names = top5Names.slice(-5).reverse();

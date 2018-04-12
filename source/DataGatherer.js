@@ -1,3 +1,13 @@
+/*
+ * DataGatherer.js
+ * This is the second script, it:
+ * Gathers all the info from Netflix's Shakti API
+ * Saves the info as a global JS var ("flixStats")
+ * Calls the next NetflixStats script
+*/
+
+
+
 /* Util functions */
 function getJSON(url, callback) {
     var xmlhttp = new XMLHttpRequest();
