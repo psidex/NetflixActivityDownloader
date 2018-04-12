@@ -9,20 +9,37 @@
 
 
 /* Process stats */
+
 // {seriesName: secondsWatched}
 var nameToWatched = {};
+// {dateString: secondsWatched}
+var dateToWatched = {};
 
 // Populate nameToWatched
 for (var itemID in flixStats.viewedItems) {
     var item = flixStats.viewedItems[itemID]
     if (item.type == "film") {
         nameToWatched[item.title] = item.duration;
-    } else {
+        if (dateToWatched[item.dateWatched]) dateToWatched[item.dateWatched] += item.duration;
+        else dateToWatched[item.dateWatched] = item.duration;
+    }
+    else {
         nameToWatched[item.title] = 0;
         for (var epID in item.watchedEpisodes) {
             ep = item.watchedEpisodes[epID];
             nameToWatched[item.title] += ep.duration;
+            if (dateToWatched[ep.dateWatched]) dateToWatched[ep.dateWatched] += ep.duration;
+            else dateToWatched[ep.dateWatched] = ep.duration;
         }
+    }
+}
+
+var mostWatchedDateTime = -Infinity;
+var mostWatchedDate = "unknown";
+for (date in dateToWatched) {
+    if(dateToWatched[date] > mostWatchedDateTime) {
+        mostWatchedDateTime = dateToWatched[date];
+        mostWatchedDate = date;
     }
 }
 
@@ -37,6 +54,7 @@ var NetflixStatsObject = document.getElementById("NetflixStats");
 NetflixStatsObject.innerHTML = `<h1>Netflix Stats for ${flixStats.userDetails.name}</h1>`;
 NetflixStatsObject.innerHTML += `<p>Amount of different films / series viewed: ${Object.keys(flixStats.viewedItems).length}</p>`;
 NetflixStatsObject.innerHTML += `<p>Total time spent watching netflix: ${Math.round(totalSecondsWatched/60/60)} hours</p>`;
+NetflixStatsObject.innerHTML += `<p>On ${mostWatchedDate} you watched a total of ${Math.round(mostWatchedDateTime/60/60)} hours of Netflix</p>`;
 NetflixStatsObject.innerHTML += '</br><h2>Top 5 Watched:</h2>';
 NetflixStatsObject.innerHTML += '<div class="chart-container"><canvas class="chart-contained" id="topWatchedChart"></canvas></div>';
 /* END Insert HTML */
@@ -45,7 +63,7 @@ NetflixStatsObject.innerHTML += '<div class="chart-container"><canvas class="cha
 
 /* Graph Stuff */
 
-// Not sure how this works... https://stackoverflow.com/a/16794116
+// Sorts an object using values, not sure how it works... https://stackoverflow.com/a/16794116
 var top5Names = Object.keys(nameToWatched).sort(function(a,b){return nameToWatched[a]-nameToWatched[b]});
 // Get biggest 5 and reverse so biggest is first
 top5Names = top5Names.slice(-5).reverse();
