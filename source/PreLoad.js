@@ -30,7 +30,7 @@ h1 {
 }
 </style>`;
 
-document.getElementsByClassName("bd")[0].innerHTML = '<div id="NetflixStats"><img height="100" width="100" src="https://thatguywiththatname.github.io/NetflixStats/source/loader.gif"></div>';
+document.getElementsByClassName("bd")[0].innerHTML = '<div id="NetflixStats"><h1>Gathering Stats</h1><br/><img height="100" width="100" src="https://thatguywiththatname.github.io/NetflixStats/source/loader.gif"></div>';
 document.getElementsByClassName("site-footer-wrapper")[0].innerHTML = "";
 
 
