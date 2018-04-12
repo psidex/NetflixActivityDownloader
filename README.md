@@ -2,6 +2,8 @@
 
 A small script that can extract and show you information about your watch history
 
+Keep in mind that Netflix does not track when you re-watch things, so the times could actually be quite a bit bigger if you re-watch a show a lot
+
 ![example](example.png)
 
 # WARNING
