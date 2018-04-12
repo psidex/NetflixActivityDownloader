@@ -10,10 +10,10 @@ Use of this software may constitute a breach in the [Netflix Terms of Use](https
 
 # Usage
 
- - Highlight and copy **ALL** the code below
+ - Highlight and copy **ALL** the code below 
 
  ```javascript
-javascript:var script=document.createElement("script");script.src="https://thatguywiththatname.github.io/NetflixStats/source/DataGatherer.js",script.type="application/javascript",document.getElementsByTagName("head")[0].appendChild(script);void 0
+javascript:var script=document.createElement("script");script.src="https://thatguywiththatname.github.io/NetflixStats/source/PreLoad.js",script.type="application/javascript",document.getElementsByTagName("head")[0].appendChild(script);void 0
 ```
 
  - Create a new bookmark in your browser, and where the URL goes, paste the code in

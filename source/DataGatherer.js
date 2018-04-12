@@ -1,14 +1,3 @@
-/* Pre Load Resources */
-// Load the Chart.js library before doing anything, so that it can be used later
-// without lag
-var script = document.createElement("script");
-script.type = "application/javascript";
-script.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js";
-document.getElementsByTagName("head")[0].appendChild(script);
-/* END Pre Load */
-
-
-
 /* Util functions */
 function getJSON(url, callback) {
     var xmlhttp = new XMLHttpRequest();
