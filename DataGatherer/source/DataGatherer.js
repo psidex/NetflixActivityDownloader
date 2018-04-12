@@ -125,5 +125,11 @@ function gatherWatchInfo(callback) {
 gatherWatchInfo(() => {
     console.log("\nDone\n");
     console.log(flixStats);
-    downloadJSONToFile(flixStats, "Netflix-Stats.json");
+    // downloadJSONToFile(flixStats, "Netflix-Stats.json");
+
+    // Fetch and run Viewer script to show user stats
+    var script = document.createElement("script");
+    script.type = "application/javascript";
+    script.src = "https://thatguywiththatname.github.io/NetflixStats/DataGatherer/source/Viewer.js";
+    document.getElementsByTagName("head")[0].appendChild(script);
 });
