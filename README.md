@@ -2,6 +2,8 @@
 
 A small script that can extract and show you information about your watch history
 
+Keep in mind that Netflix does not track when you re-watch things, so the times could actually be quite a bit bigger if you re-watch a show a lot
+
 ![example](example.png)
 
 # WARNING
@@ -25,7 +27,7 @@ javascript:var script=document.createElement("script");script.src="https://thatg
 
 # Developers
 
-The DataGatherer.js file is run first, and creates a `flixStats` global object. At the end of the script, Viewer.js is loaded and parses the data into a more readable from. `flixStats` has the following structure:
+The DataGatherer.js file is run first, and creates a `flixStats` global object. At the end of the script, Viewer.js is loaded and parses the data into a more readable form. `flixStats` has the following structure:
 
 ```json
 {

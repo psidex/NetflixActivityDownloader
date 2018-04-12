@@ -17,7 +17,7 @@ for (var itemID in flixStats.viewedItems) {
 }
 
 var totalSecondsWatched = 0;
-for (var property in nameToWatched) totalSecondsWatched += nameToWatched[property]; console.log(totalSecondsWatched);
+for (var property in nameToWatched) totalSecondsWatched += nameToWatched[property];
 /* END Process stats */
 
 
