@@ -25,6 +25,10 @@ javascript:var script=document.createElement("script");script.src="https://thatg
  - If nothing happens, open your browsers console so you can see what is going on (F12 for Chrome, then click the "Console" tab). If there are any errors you will see them highlighted in red
  - If all went well, you should now see your watch history replaced with more information!
 
+# Notes
+
+ - Why is the most time watched in a day > 24 hours? Netflix does not keep an accurate record of your watch history. If you skip credits or stop watching 2/3 of the way through it can count it as a full watch
+
 # Developers
 
 The DataGatherer.js file is run first, and creates a `flixStats` global object. At the end of the script, Viewer.js is loaded and parses the data into a more readable form. `flixStats` has the following structure:
