@@ -119,6 +119,6 @@ gatherWatchInfo(() => {
     // Fetch and run Viewer script to show user stats
     var script = document.createElement("script");
     script.type = "application/javascript";
-    script.src = "https://thatguywiththatname.github.io/NetflixStats/DataGatherer/source/Viewer.js";
+    script.src = "https://thatguywiththatname.github.io/NetflixStats/source/Viewer.js";
     document.getElementsByTagName("head")[0].appendChild(script);
 });
