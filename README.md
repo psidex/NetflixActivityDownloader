@@ -2,6 +2,8 @@
 
 A small script that can extract and show you information about your watch history
 
+![example](example.png)
+
 # WARNING
 
 Use of this software may constitute a breach in the [Netflix Terms of Use](https://help.netflix.com/legal/termsofuse) and/or the [End User License Agreement](https://help.netflix.com/legal/eula). Use at your own risk.
