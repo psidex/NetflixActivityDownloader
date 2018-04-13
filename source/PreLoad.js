@@ -5,7 +5,6 @@
  * Insert custom CSS
  * Insert & remove some HTML
  * Show a loading symbol
- * Call the next NetflixStats script
 */
 
 

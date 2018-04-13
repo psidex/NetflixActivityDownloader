@@ -1,23 +1,20 @@
 /*
  * DataGatherer.js
- * This is the second script, it:
  * Gathers all the info from Netflix's Shakti API
  * Saves the info as a global JS var ("flixStats")
- * Calls the next NetflixStats script
 */
 
 
 
-/* Internal API stuff */
+// Internal API stuff
 var flixInfo = window.netflix.reactContext.models.serverDefs.data;
 var userInfo = window.netflix.reactContext.models.userInfo.data;
 var activityURL = flixInfo.SHAKTI_API_ROOT + "/" + flixInfo.BUILD_IDENTIFIER + "/viewingactivity?" + "authURL=" + userInfo.authURL + "&pgSize=100" + "&pg=";
 console.log("using URL: " + activityURL);
-/* END Internal API stuff */
 
 
 
-/* Main */
+// Main data gathering
 var flixStats = {
     viewedItems: {},
     userDetails: {

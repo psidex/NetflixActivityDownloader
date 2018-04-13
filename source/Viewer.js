@@ -1,14 +1,10 @@
 /*
  * Viewer.js
- * This is the third and final script, it:
  * Performs some calculations on the flixStats data
- * Inserts custom HTML into the NetflixStats div
- * Draws the charts using the pre-loaded Chart.js library
+ * Inserts the custom HTML into the NetflixStats div
 */
 
 
-
-/* Process stats */
 
 // {seriesName: secondsWatched}
 var nameToWatched = {};
@@ -34,6 +30,7 @@ for (var itemID in flixStats.viewedItems) {
     }
 }
 
+// Calculates the most watched date and how many seconds
 var mostWatchedDateTime = -Infinity;
 var mostWatchedDate = "unknown";
 for (date in dateToWatched) {
@@ -43,17 +40,28 @@ for (date in dateToWatched) {
     }
 }
 
+// Adds up all time values for a time watched total
 var totalSecondsWatched = 0;
 for (var property in nameToWatched) totalSecondsWatched += nameToWatched[property];
-/* END Process stats */
+
+
+// Gets the top 5 most watched shows and the time spent watching
+var top5Times = [];
+// Sorts an object using values, not sure how it works... https://stackoverflow.com/a/16794116
+var top5Names = Object.keys(nameToWatched).sort(function(a,b){return nameToWatched[a]-nameToWatched[b]});
+// Get biggest 5 and reverse so biggest is first
+top5Names = top5Names.slice(-5).reverse();
+for (var index in top5Names) {
+    // Time in mins
+    top5Times.push((nameToWatched[top5Names[index]])/60);
+}
 
 
 
-/* Insert HTML */
+// Insert HTML
 var NetflixStatsObject = document.getElementById("NetflixStats");
 // This is handled by the build script
 NetflixStatsObject.innerHTML = `{NetflixStatsHTML}`;
-/* END Insert HTML */
 
 
 

@@ -1,3 +1,11 @@
+/*
+ * Utils.js
+ * This just contains a few utility functions
+*/
+
+
+
+// GETs JSON data from URL
 function getJSON(url, callback) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
