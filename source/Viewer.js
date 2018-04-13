@@ -41,7 +41,7 @@ var top5WatchedDates = Object.keys(dateToWatched).sort(function(a,b){return date
 // Get biggest 5 and reverse so biggest is first
 top5WatchedDates = top5WatchedDates.slice(-5).reverse();
 for (var index in top5WatchedDates) {
-    // Time in mins
+    // Time in hours
     top5WatchedDates_Times.push((dateToWatched[top5WatchedDates[index]])/60/60);
 }
 
@@ -50,7 +50,6 @@ var top5WatchedShows_Times = [];
 var top5WatchedShows = Object.keys(nameToWatched).sort(function(a,b){return nameToWatched[a]-nameToWatched[b]});
 top5WatchedShows = top5WatchedShows.slice(-5).reverse();
 for (var index in top5WatchedShows) {
-    // Time in mins
     top5WatchedShows_Times.push((nameToWatched[top5WatchedShows[index]])/60/60);
 }
 
