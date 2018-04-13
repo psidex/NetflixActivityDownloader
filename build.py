@@ -1,6 +1,10 @@
 """
 build.py
 
+This takes all the files in /source, minifies them, inserts
+the necessary HTML and CSS, then concatenates them all into
+minified/NetflixStats.js
+
 The minifiers aren't perfect but they are good enough
 """
 
