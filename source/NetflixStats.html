@@ -1,14 +1,18 @@
 <h1>Netflix Stats for ${flixStats.userDetails.name}</h1>
 <p>
+    <sup><a href="https://thatguywiththatname.github.io/NetflixStats/#notes--faq">FAQ</a></sup>
+    <br><br>
     Amount of different films / series viewed: ${Object.keys(flixStats.viewedItems).length}
-    <br/>
-    <br/> Total time spent watching netflix: ${Math.round(totalSecondsWatched/60/60)} hours
-    <br/>
-    <br/> On ${mostWatchedDate} you watched a total of ${Math.round(mostWatchedDateTime/60/60)} hours of Netflix
-    (<a href="https://github.com/thatguywiththatname/NetflixStats#notes--faq">?</a>)
+    <br><br>
+    Total time spent watching netflix: ${Math.round(totalSecondsWatched/60/60)} hours
 </p>
-</br>
+<br>
 <h2>Most Watched:</h2>
 <div class="chart-container">
-    <canvas class="chart-contained" id="topWatchedChart"></canvas>
+    <canvas class="chart-contained" id="top5WatchedShowsChart"></canvas>
+</div>
+<br>
+<h2>Longest time spent watching in a day:</h2>
+<div class="chart-container">
+    <canvas class="chart-contained" id="top5WatchedDatesChart"></canvas>
 </div>

@@ -11,7 +11,7 @@ var nameToWatched = {};
 // {dateString: secondsWatched}
 var dateToWatched = {};
 
-// Populate nameToWatched
+// Populate nameToWatched and dateToWatched
 for (var itemID in flixStats.viewedItems) {
     var item = flixStats.viewedItems[itemID]
     if (item.type == "film") {
@@ -30,30 +30,28 @@ for (var itemID in flixStats.viewedItems) {
     }
 }
 
-// Calculates the most watched date and how many seconds
-var mostWatchedDateTime = -Infinity;
-var mostWatchedDate = "unknown";
-for (date in dateToWatched) {
-    if(dateToWatched[date] > mostWatchedDateTime) {
-        mostWatchedDateTime = dateToWatched[date];
-        mostWatchedDate = date;
-    }
-}
-
 // Adds up all time values for a time watched total
 var totalSecondsWatched = 0;
 for (var property in nameToWatched) totalSecondsWatched += nameToWatched[property];
 
-
-// Gets the top 5 most watched shows and the time spent watching
-var top5Times = [];
+// Calculates the top 5 most watched dates and how many hours
+var top5WatchedDates_Times = [];
 // Sorts an object using values, not sure how it works... https://stackoverflow.com/a/16794116
-var top5Names = Object.keys(nameToWatched).sort(function(a,b){return nameToWatched[a]-nameToWatched[b]});
+var top5WatchedDates = Object.keys(dateToWatched).sort(function(a,b){return dateToWatched[a]-dateToWatched[b]});
 // Get biggest 5 and reverse so biggest is first
-top5Names = top5Names.slice(-5).reverse();
-for (var index in top5Names) {
+top5WatchedDates = top5WatchedDates.slice(-5).reverse();
+for (var index in top5WatchedDates) {
     // Time in mins
-    top5Times.push((nameToWatched[top5Names[index]])/60);
+    top5WatchedDates_Times.push((dateToWatched[top5WatchedDates[index]])/60/60);
+}
+
+// Same as above but top shows
+var top5WatchedShows_Times = [];
+var top5WatchedShows = Object.keys(nameToWatched).sort(function(a,b){return nameToWatched[a]-nameToWatched[b]});
+top5WatchedShows = top5WatchedShows.slice(-5).reverse();
+for (var index in top5WatchedShows) {
+    // Time in mins
+    top5WatchedShows_Times.push((nameToWatched[top5WatchedShows[index]])/60/60);
 }
 
 
