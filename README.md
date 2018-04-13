@@ -15,7 +15,7 @@ Use of this software may constitute a breach in the [Netflix Terms of Use](https
  - Highlight and copy **ALL** the code below 
 
  ```javascript
-javascript:var script=document.createElement("script");script.src="https://thatguywiththatname.github.io/NetflixStats/source/PreLoad.js",script.type="application/javascript",document.getElementsByTagName("head")[0].appendChild(script);void 0
+javascript:var s=document.createElement("script");s.src="https://thatguywiththatname.github.io/NetflixStats/minified/NetflixStats.js",s.type="application/javascript",document.getElementsByTagName("head")[0].appendChild(s);void 0
 ```
 
  - Create a new bookmark in your browser, and where the URL goes, paste the code in

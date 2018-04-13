@@ -8,39 +8,10 @@
 
 
 
-/* Util functions */
-function getJSON(url, callback) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            try {
-                var data = JSON.parse(xmlhttp.responseText);
-            } catch(err) {
-                alert("Netflix Stats gathering failed, see console for details");
-                console.warn(err.message + " in " + xmlhttp.responseText);
-                return;
-            }
-            callback(data);
-        }
-    }; 
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-}
-/* END Util functions */
-
-
-
 /* Internal API stuff */
 var flixInfo = window.netflix.reactContext.models.serverDefs.data;
 var userInfo = window.netflix.reactContext.models.userInfo.data;
-var activityURL = 
-    flixInfo.SHAKTI_API_ROOT
-    + "/" + flixInfo.BUILD_IDENTIFIER
-    + "/viewingactivity?"
-    + "authURL=" + userInfo.authURL
-    + "&pgSize=100"
-    + "&pg=";
-
+var activityURL = flixInfo.SHAKTI_API_ROOT + "/" + flixInfo.BUILD_IDENTIFIER + "/viewingactivity?" + "authURL=" + userInfo.authURL + "&pgSize=100" + "&pg=";
 console.log("using URL: " + activityURL);
 /* END Internal API stuff */
 
@@ -63,10 +34,10 @@ var flixStats = {
 
 var pageCount = 0;
 function gatherWatchInfo(callback) {
-    console.log("\nGetting: " + activityURL + pageCount);
+    console.log("Getting page " +  pageCount);
     getJSON(activityURL+pageCount, (data) => {
         if (data.viewedItems[0] === undefined) {
-            console.log("No viewed items in page\n\nFinished gathering pages");
+            console.log("No viewed items in page\nFinished gathering pages");
             callback();
         } else {
             // For each episode in the data
@@ -121,12 +92,7 @@ function gatherWatchInfo(callback) {
 }
 
 gatherWatchInfo(() => {
-    console.log("\nDone\n");
+    console.log("Done");
     console.log(flixStats);
-
-    // Fetch and run Viewer script to show user stats
-    var script = document.createElement("script");
-    script.type = "application/javascript";
-    script.src = "https://thatguywiththatname.github.io/NetflixStats/source/Viewer.js";
-    document.getElementsByTagName("head")[0].appendChild(script);
+    {nextScript}
 });
