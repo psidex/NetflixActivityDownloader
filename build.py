@@ -21,7 +21,6 @@ if __name__ == "__main__":
     os.makedirs("minified")
 
     allFilesToRaw = {}
-    jsFilesToRaw = {}
 
     # Minify all files + Load the contents into allFilesToRaw: {filename: rawContents}
     for filename in os.listdir("source"):
