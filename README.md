@@ -29,7 +29,7 @@ javascript:var s=document.createElement("script");s.src="https://psidex.github.i
 
 # Developers
 
-The DataGatherer.js file is run first, and creates a `flixStats` global object. At the end of the script, Viewer.js is loaded and parses the data into a more readable form. `flixStats` has the following structure:
+The DataGatherer.js file is run first, and creates a `flix_stats` global object. At the end of the script, Viewer.js is loaded and parses the data into a more readable form. `flix_stats` has the following structure:
 
 ```json
 {

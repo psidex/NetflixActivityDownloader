@@ -1,9 +1,6 @@
-/*
- * Charts.js
+/* Charts.js
  * This deals with drawing the charts
 */
-
-
 
 var top5WatchedShowsChartCTX = document.getElementById("top5WatchedShowsChart").getContext("2d");
 var top5WatchedShowsChart = new Chart(top5WatchedShowsChartCTX, {
@@ -22,11 +19,11 @@ var top5WatchedShowsChart = new Chart(top5WatchedShowsChartCTX, {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero:true
+                    beginAtZero: true
                 }
             }]
         },
-        responsive:true,
+        responsive: true,
         maintainAspectRatio: false
     }
 });
@@ -48,11 +45,11 @@ var top5WatchedDatesChart = new Chart(top5WatchedDatesChartCTX, {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero:true
+                    beginAtZero: true
                 }
             }]
         },
-        responsive:true,
+        responsive: true,
         maintainAspectRatio: false
     }
 });
