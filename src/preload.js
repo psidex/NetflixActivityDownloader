@@ -39,7 +39,7 @@ document.getElementsByClassName("bd")[0].innerHTML = `
 <div id="NetflixStats">
     <h1>Gathering Stats</h1>
     <br/>
-    <img height="100" width="100" src="https://psidex.github.io/NetflixStats/source/loader.gif">
+    <img height="100" width="100" src="https://psidex.github.io/NetflixStats/res/loader.gif">
 </div>`;
 
 // Remove the footer as it gets in the way

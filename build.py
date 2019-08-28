@@ -10,7 +10,7 @@ from typing import Dict
 from jsmin import jsmin
 
 DIR_MINIFIED = pathlib.Path("minified")
-DIR_SOURCE = pathlib.Path("source")
+DIR_SOURCE = pathlib.Path("src")
 
 
 def create_minified_dir() -> None:
@@ -24,7 +24,7 @@ def create_minified_dir() -> None:
 
 
 def load_files() -> Dict[str, str]:
-    """Load all .html .js & .css files from source/ into a dictionary."""
+    """Load all .html .js & .css files from src/ into a dictionary."""
     files = {}
 
     for file_name in os.listdir(DIR_SOURCE):

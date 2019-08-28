@@ -21,7 +21,7 @@ h1 {
 <div id="NetflixStats">
     <h1>Gathering Stats</h1>
     <br/>
-    <img height="100" width="100" src="https://psidex.github.io/NetflixStats/source/loader.gif">
+    <img height="100" width="100" src="https://psidex.github.io/NetflixStats/res/loader.gif">
 </div>`;document.getElementsByClassName("site-footer-wrapper")[0].innerHTML="";var flixInfo=window.netflix.reactContext.models.serverDefs.data;var userInfo=window.netflix.reactContext.models.userInfo.data;var activityURL=flixInfo.API_ROOT+"/shakti/"+flixInfo.BUILD_IDENTIFIER+"/viewingactivity?"+"authURL="+userInfo.authURL+"&pgSize=100"+"&pg=";console.log("Using API URL: "+activityURL);var flixStats={viewedItems:{},userDetails:{name:userInfo.name,guid:userInfo.guid,countryOfSignup:userInfo.countryOfSignup,currentCountry:userInfo.currentCountry,currentRegion:userInfo.currentRegion,membershipStatus:userInfo.membershipStatus,isInFreeTrial:userInfo.isInFreeTrial,isKids:userInfo.isKids}};var pageCount=0;function gatherWatchInfo(callback){console.log("Getting page "+pageCount);fetch(activityURL+pageCount).then((response)=>{return response.json();}).then((data)=>{if(data.viewedItems[0]===undefined){console.log("No viewed items in page, finished gathering pages");callback();}
 else{for(let i=0;i<data.viewedItems.length;i++){let itemData=data.viewedItems[i];let itemMovieID=itemData.movieID;if(itemData.seriesTitle){var itemUniqueID=itemData.series;var itemTitle=itemData.seriesTitle
 var itemType="series";var episodeData={"title":itemData.title,"dateWatched":itemData.dateStr,"duration":itemData.duration};}else{var itemUniqueID=itemMovieID;var itemTitle=itemData.videoTitle
