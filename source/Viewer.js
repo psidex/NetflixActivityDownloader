@@ -1,5 +1,5 @@
 /* Viewer.js
- * Performs some calculations on the flix_stats data
+ * Performs some calculations on the flixStats data
  * Inserts the custom HTML into the NetflixStats div
 */
 
@@ -9,8 +9,8 @@ var nameToWatched = {};
 var dateToWatched = {};
 
 // Populate nameToWatched and dateToWatched
-for (var itemID in flix_stats.viewedItems) {
-    var item = flix_stats.viewedItems[itemID]
+for (var itemID in flixStats.viewedItems) {
+    var item = flixStats.viewedItems[itemID]
     if (item.type == "film") {
         nameToWatched[item.title] = item.duration;
         if (dateToWatched[item.dateWatched]) dateToWatched[item.dateWatched] += item.duration;
@@ -55,12 +55,12 @@ var NetflixStatsObject = document.getElementById("NetflixStats");
 
 // Minified, un-minify to read / edit
 NetflixStatsObject.innerHTML = `
-<h1>Netflix Stats for ${flix_stats.userDetails.name}</h1>
+<h1>Netflix Stats for ${flixStats.userDetails.name}</h1>
 <p>
     <sup><a href="https://psidex.github.io/NetflixStats/#notes--faq">FAQ</a></sup>
     <br>
     <br>
-    Amount of different films / series viewed: ${Object.keys(flix_stats.viewedItems).length}
+    Amount of different films / series viewed: ${Object.keys(flixStats.viewedItems).length}
     <br>
     <br>
     Total time spent watching netflix: ${Math.round(totalSecondsWatched / 60 / 60)} hours</p>
