@@ -1,11 +1,3 @@
-/* PreLoad.js
- * This is the first script that is run and does a few things:
- * - Load the Chart.js library
- * - Insert custom CSS
- * - Insert & remove some HTML
- * - Show a loading symbol
-*/
-
 // Load the Chart.js library before doing anything, so that it can be used later
 let chartJSScript = document.createElement("script");
 chartJSScript.type = "application/javascript";
@@ -14,9 +6,11 @@ document.getElementsByTagName("head")[0].appendChild(chartJSScript);
 
 // Insert custom CSS
 document.head.innerHTML += `
+<style>
 h1 {
     color: #000;
 }
+
 #NetflixStats {
     padding-top: 10px;
     text-align: center;
@@ -24,25 +18,48 @@ h1 {
     width: 95%;
     opacity: 1;
     z-index: 1;
-    background: RGB(243,243,243);
+    background: RGB(243, 243, 243);
 }
+
 .chart-container {
     width: 600px;
     height: 300px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-}`;
+}
+</style>`;
 
 // Add loading symbol
 document.getElementsByClassName("bd")[0].innerHTML = `
 <div id="NetflixStats">
     <h1>Gathering Stats</h1>
-    <br/>
+    <br />
     <img height="100" width="100" src="https://psidex.github.io/NetflixStats/res/loader.gif">
 </div>`;
 
 // Remove the footer as it gets in the way
 document.getElementsByClassName("site-footer-wrapper")[0].innerHTML = "";
 
-{ nextfile }
+// Internal API stuff
+let flixInfo = window.netflix.reactContext.models.serverDefs.data;
+let userInfo = window.netflix.reactContext.models.userInfo.data;
+
+// A global var containing the Shakti API URL for watch history
+window.activityURL = flixInfo.API_ROOT + "/shakti/" + flixInfo.BUILD_IDENTIFIER + "/viewingactivity?authURL=" + userInfo.authURL + "&pg=";
+console.log("Using API URL: " + activityURL);
+
+// A global var containing all gathered info
+window.flixStats = {
+    viewedItems: {},
+    userDetails: {
+        name: userInfo.name,
+        guid: userInfo.guid,
+        countryOfSignup: userInfo.countryOfSignup,
+        currentCountry: userInfo.currentCountry,
+        currentRegion: userInfo.currentRegion,
+        membershipStatus: userInfo.membershipStatus,
+        isInFreeTrial: userInfo.isInFreeTrial,
+        isKids: userInfo.isKids
+    }
+};

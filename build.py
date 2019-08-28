@@ -9,35 +9,30 @@ import logging
 from typing import Dict
 from jsmin import jsmin
 
-DIR_MINIFIED = pathlib.Path("minified")
-DIR_SOURCE = pathlib.Path("src")
 
-
-def create_minified_dir() -> None:
+def create_minified_dir(minified_directory: pathlib.Path) -> None:
     """Create the minified directory. If it exists, remove it, then create it again."""
-    if os.path.exists(DIR_MINIFIED):
-        shutil.rmtree(DIR_MINIFIED)
+    if os.path.exists(minified_directory):
+        shutil.rmtree(minified_directory)
         logging.info("Removed /minified")
 
-    os.makedirs(DIR_MINIFIED)
+    os.makedirs(minified_directory)
     logging.info("Created /minified")
 
 
-def load_files() -> Dict[str, str]:
+def load_files(source_directory: pathlib.Path) -> Dict[str, str]:
     """Load all .html .js & .css files from /src into a dictionary."""
     files = {}
 
-    for file_name in os.listdir(DIR_SOURCE):
+    for file_name in os.listdir(source_directory):
         file_ext = file_name.split(".")[-1]
 
         if file_ext == "js":
             logging.info(f"Loading file: {file_name}")
-            file_path = DIR_SOURCE.joinpath(file_name)
+            file_path = source_directory.joinpath(file_name)
 
             with open(file_path, "r") as in_file:
-                file_data = in_file.read()
-
-            files[file_name] = file_data
+                files[file_name] = in_file.read()
 
         else:
             logging.info(f"Skipped file: {file_name}")
@@ -45,29 +40,30 @@ def load_files() -> Dict[str, str]:
     return files
 
 
-def concat_files(minified_files: Dict[str, str]) -> str:
-    """Concatenate all of the .js files together using the "nextfile" line as a guide."""
+def concat_files(file_data_dict: Dict[str, str]) -> str:
+    """Concatenate all of the .js files."""
+    order = ["preload.js", "viewer.js", "datagatherer.js"]
+    concatenated = ""
 
-    # Used to determine the order to concat stuff together
-    order = ["preload.js", "datagatherer.js", "viewer.js", "charts.js"]
-
-    concatenated = "{ nextfile }"
     for filename in order:
         logging.info(f"Concatenating {filename}")
-        concatenated = concatenated.replace("{ nextfile }", minified_files[filename])
+        concatenated += file_data_dict[filename]
 
     return concatenated
 
 
 def main() -> None:
-    create_minified_dir()
-    all_files = load_files()
-    concatenated = concat_files(all_files)
+    dir_minified = pathlib.Path("minified")
+    dir_source = pathlib.Path("src")
+
+    create_minified_dir(dir_minified)
+    file_data_dict = load_files(dir_source)
+    concatenated = concat_files(file_data_dict)
 
     logging.info("Minifying concatenated file")
     minified = jsmin(concatenated, quote_chars="'\"`")  # quote_chars to support ES6
 
-    with open(DIR_MINIFIED.joinpath("NetflixStats.js"), "w") as out_file:
+    with open(dir_minified.joinpath("NetflixStats.js"), "w") as out_file:
         out_file.write(minified)
 
     logging.info(f"Minified file written to /minified")
