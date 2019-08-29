@@ -1,32 +1,4 @@
-// Load the Chart.js library before doing anything, so that it can be used later
-let chartJSScript = document.createElement("script");
-chartJSScript.type = "application/javascript";
-chartJSScript.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js";
-document.getElementsByTagName("head")[0].appendChild(chartJSScript);
-
-// Shakti API stuff
-let flixInfo = window.netflix.reactContext.models.serverDefs.data;
-let userInfo = window.netflix.reactContext.models.userInfo.data;
-
-// A global variable containing the Shakti API URL for watch history
-var shaktiHistoryURL = flixInfo.API_ROOT + "/shakti/" + flixInfo.BUILD_IDENTIFIER + "/viewingactivity?authURL=" + userInfo.authURL + "&pg=";
-
-// A global variable that will contain all gathered info
-var flixStats = {
-    viewedItems: {},
-    userDetails: {
-        name: userInfo.name,
-        guid: userInfo.guid,
-        countryOfSignup: userInfo.countryOfSignup,
-        currentCountry: userInfo.currentCountry,
-        currentRegion: userInfo.currentRegion,
-        membershipStatus: userInfo.membershipStatus,
-        isInFreeTrial: userInfo.isInFreeTrial,
-        isKids: userInfo.isKids
-    }
-};
-
-function view() {
+function showInfo() {
     /* Inserts the HTML that the user will see that contains all the info 
      * Performs calculations on the flixStats data and displays it in Chart.js charts
      */
@@ -84,7 +56,7 @@ function view() {
     // Insert HTML for the stats
     var NetflixStatsObject = document.getElementById("NetflixStats");
     NetflixStatsObject.innerHTML = `
-    <h1>Netflix Stats for ${flixStats.userDetails.name}</h1>
+    <h1>Netflix Stats for ${flixStats.userInfo.name}</h1>
     <p>
         <sup><a href="https://psidex.github.io/NetflixStats/#notes--faq">FAQ</a></sup>
         <br>
@@ -159,7 +131,7 @@ function view() {
     });
 }
 
-function gatherWatchInfo(callback, currentPage = 0) {
+function gatherWatchInfo(currentPage = 0) {
     /* Iterates through all watch history pages and pulls the needed info
      * Populates the global flixStats object
      */
@@ -173,7 +145,6 @@ function gatherWatchInfo(callback, currentPage = 0) {
         .then((data) => {
             if (data.viewedItems[0] === undefined) {
                 console.log("No viewed items in page, finished gathering pages");
-                callback();
             } else {
                 // For each item in the data
                 for (let i = 0; i < data.viewedItems.length; i++) {
@@ -221,13 +192,12 @@ function gatherWatchInfo(callback, currentPage = 0) {
                     }
                 }
 
-                // First time I have ever found a proper use case for recursion :O
-                gatherWatchInfo(callback, currentPage + 1);
+                gatherWatchInfo(currentPage + 1);
             }
         });
 }
 
-function preLoad() {
+function changeUI() {
     /* Does several things that happen before loading the data:
      * - Insert custom CSS
      * - Insert loading symbol
@@ -268,13 +238,57 @@ function preLoad() {
     document.getElementsByClassName("site-footer-wrapper")[0].innerHTML = "";
 }
 
-function main() {
-    preLoad();
-    console.log("Using API URL: " + shaktiHistoryURL);
-    gatherWatchInfo(() => {
-        console.log("Finished gathering data");
-        view();
+function loadExternal() {
+    /* Load the Chart.js library before doing anything, so that it can be used later
+     */
+    return new Promise((resolve, reject) => {
+        let chartJSScript = document.createElement("script");
+        chartJSScript.type = "application/javascript";
+        chartJSScript.src = "https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js";
+        chartJSScript.onload = () => {
+            console.log("Chart.js loaded")
+            resolve();
+        };
+        document.head.appendChild(chartJSScript);
     });
+}
+
+function setupNetflixVariables() {
+    /* Sets up 2 global variables to be used later, shaktiHistoryURL and flixStats
+     */
+
+    // Shakti API stuff
+    let flixInfo = window.netflix.reactContext.models.serverDefs.data;
+    let userInfo = window.netflix.reactContext.models.userInfo.data;
+
+    // A global variable containing the Shakti API URL for watch history
+    window.shaktiHistoryURL = flixInfo.API_ROOT + "/shakti/" + flixInfo.BUILD_IDENTIFIER + "/viewingactivity?authURL=" + userInfo.authURL + "&pg=";
+
+    // A global variable that will contain all gathered info
+    window.flixStats = {
+        viewedItems: {},
+        userInfo: userInfo
+    };
+
+    console.log("Using API URL: " + shaktiHistoryURL);
+}
+
+function main() {
+    loadExternal()
+        .then(() => {
+            changeUI();
+        })
+        .then(() => {
+            setupNetflixVariables();
+        })
+        .then(() => {
+            // TODO: This only waits for 1 iteration of the recursion before it goes on to the next .then?
+            gatherWatchInfo()
+        })
+        .then(() => {
+            console.log("Finished gathering data");
+            showInfo();
+        });
 }
 
 main();
