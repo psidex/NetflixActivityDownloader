@@ -4,53 +4,15 @@ chartJSScript.type = "application/javascript";
 chartJSScript.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js";
 document.getElementsByTagName("head")[0].appendChild(chartJSScript);
 
-// Insert custom CSS
-document.head.innerHTML += `
-<style>
-h1 {
-    color: #000;
-}
-
-#NetflixStats {
-    padding-top: 10px;
-    text-align: center;
-    position: absolute;
-    width: 95%;
-    opacity: 1;
-    z-index: 1;
-    background: RGB(243, 243, 243);
-}
-
-.chart-container {
-    width: 600px;
-    height: 300px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-</style>`;
-
-// Add loading symbol
-document.getElementsByClassName("bd")[0].innerHTML = `
-<div id="NetflixStats">
-    <h1>Gathering Stats</h1>
-    <br />
-    <img height="100" width="100" src="https://psidex.github.io/NetflixStats/res/loader.gif">
-</div>`;
-
-// Remove the footer as it gets in the way
-document.getElementsByClassName("site-footer-wrapper")[0].innerHTML = "";
-
 // Shakti API stuff
 let flixInfo = window.netflix.reactContext.models.serverDefs.data;
 let userInfo = window.netflix.reactContext.models.userInfo.data;
 
-// A global var containing the Shakti API URL for watch history
-window.activityURL = flixInfo.API_ROOT + "/shakti/" + flixInfo.BUILD_IDENTIFIER + "/viewingactivity?authURL=" + userInfo.authURL + "&pg=";
-console.log("Using API URL: " + activityURL);
+// A global variable containing the Shakti API URL for watch history
+var shaktiHistoryURL = flixInfo.API_ROOT + "/shakti/" + flixInfo.BUILD_IDENTIFIER + "/viewingactivity?authURL=" + userInfo.authURL + "&pg=";
 
-// A global var containing all gathered info
-window.flixStats = {
+// A global variable that will contain all gathered info
+var flixStats = {
     viewedItems: {},
     userDetails: {
         name: userInfo.name,
@@ -65,9 +27,8 @@ window.flixStats = {
 };
 
 function view() {
-    /* Performs some calculations on the flixStats data
-     * Inserts the custom HTML into the NetflixStats div
-     * Inserts the charts
+    /* Inserts the HTML that the user will see that contains all the info 
+     * Performs calculations on the flixStats data and displays it in Chart.js charts
      */
 
     // {seriesName: secondsWatched}
@@ -120,10 +81,8 @@ function view() {
         top5WatchedShows_Times.push((nameToWatched[top5WatchedShows[index]]) / 60 / 60);
     }
 
-    // Insert HTML
+    // Insert HTML for the stats
     var NetflixStatsObject = document.getElementById("NetflixStats");
-
-    // Minified, un-minify to read / edit
     NetflixStatsObject.innerHTML = `
     <h1>Netflix Stats for ${flixStats.userDetails.name}</h1>
     <p>
@@ -145,10 +104,7 @@ function view() {
         <canvas class="chart-contained" id="top5WatchedDatesChart"></canvas>
     </div>`;
 
-
-    /* Charts
-     * This deals with drawing the charts
-     */
+    // Create and draw all the charts
 
     let top5WatchedShowsChartCTX = document.getElementById("top5WatchedShowsChart").getContext("2d");
     let top5WatchedShowsChart = new Chart(top5WatchedShowsChartCTX, {
@@ -204,14 +160,13 @@ function view() {
 }
 
 function gatherWatchInfo(callback, currentPage = 0) {
-    /*
-     * Iterates through all watch history pages and pulls the needed info
-     * Populates the global window.flixStats object
+    /* Iterates through all watch history pages and pulls the needed info
+     * Populates the global flixStats object
      */
 
     console.log("Getting page " + currentPage);
 
-    fetch(activityURL + currentPage)
+    fetch(shaktiHistoryURL + currentPage)
         .then((response) => {
             return response.json();
         })
@@ -252,7 +207,7 @@ function gatherWatchInfo(callback, currentPage = 0) {
 
                         if (itemType == "series") {
                             flixStats.viewedItems[itemUniqueID].watchedEpisodes = {
-                                [itemMovieID]: episodeData
+                                itemMovieID: episodeData
                             };
                         } else {
                             flixStats.viewedItems[itemUniqueID].dateWatched = itemData.dateStr;
@@ -272,7 +227,54 @@ function gatherWatchInfo(callback, currentPage = 0) {
         });
 }
 
-gatherWatchInfo(() => {
-    console.log("Finished gathering data");
-    view();
-});
+function preLoad() {
+    /* Does several things that happen before loading the data:
+     * - Insert custom CSS
+     * - Insert loading symbol
+     * - Remove the footer (as it gets in the way)
+     */
+    document.head.innerHTML += `
+    <style>
+    h1 {
+        color: #000;
+    }
+
+    #NetflixStats {
+        padding-top: 10px;
+        text-align: center;
+        position: absolute;
+        width: 95%;
+        opacity: 1;
+        z-index: 1;
+        background: RGB(243, 243, 243);
+    }
+
+    .chart-container {
+        width: 600px;
+        height: 300px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    </style>`;
+
+    document.getElementsByClassName("bd")[0].innerHTML = `
+    <div id="NetflixStats">
+        <h1>Gathering Stats</h1>
+        <br />
+        <img height="100" width="100" src="https://psidex.github.io/NetflixStats/res/loader.gif">
+    </div>`;
+
+    document.getElementsByClassName("site-footer-wrapper")[0].innerHTML = "";
+}
+
+function main() {
+    preLoad();
+    console.log("Using API URL: " + shaktiHistoryURL);
+    gatherWatchInfo(() => {
+        console.log("Finished gathering data");
+        view();
+    });
+}
+
+main();
