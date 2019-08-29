@@ -131,7 +131,7 @@ function showInfo() {
     });
 }
 
-function gatherWatchInfo(currentPage = 0) {
+function gatherWatchInfo(callback, currentPage = 0) {
     /* Iterates through all watch history pages and pulls the needed info
      * Populates the global flixStats object
      */
@@ -145,6 +145,7 @@ function gatherWatchInfo(currentPage = 0) {
         .then((data) => {
             if (data.viewedItems[0] === undefined) {
                 console.log("No viewed items in page, finished gathering pages");
+                callback();
             } else {
                 // For each item in the data
                 for (let i = 0; i < data.viewedItems.length; i++) {
@@ -192,7 +193,7 @@ function gatherWatchInfo(currentPage = 0) {
                     }
                 }
 
-                gatherWatchInfo(currentPage + 1);
+                gatherWatchInfo(callback, currentPage + 1);
             }
         });
 }
@@ -232,7 +233,8 @@ function changeUI() {
     <div id="NetflixStats">
         <h1>Gathering Stats</h1>
         <br />
-        <img height="100" width="100" src="https://psidex.github.io/NetflixStats/res/loader.gif">
+        <!-- Uses Netflix's built-in loading symbol -->
+        <div><div class="basic-spinner"></div></div>
     </div>`;
 
     document.getElementsByClassName("site-footer-wrapper")[0].innerHTML = "";
@@ -282,12 +284,10 @@ function main() {
             setupNetflixVariables();
         })
         .then(() => {
-            // TODO: This only waits for 1 iteration of the recursion before it goes on to the next .then?
-            gatherWatchInfo()
-        })
-        .then(() => {
-            console.log("Finished gathering data");
-            showInfo();
+            gatherWatchInfo(() => {
+                console.log("Finished gathering data");
+                showInfo();
+            });
         });
 }
 
