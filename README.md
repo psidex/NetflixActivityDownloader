@@ -1,6 +1,6 @@
 # NetflixStats
 
-A small script that can extract and show you information about your watch history
+A small script to extract and dispay information about your Netflix watch history
 
 ![example](example.png)
 
