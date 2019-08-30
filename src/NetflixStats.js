@@ -280,7 +280,7 @@ async function main() {
     startLoadingUI();
     setupNetflixVariables();
     await loadChartJS()
-    await gatherWatchInfo(); //alriight
+    await gatherWatchInfo();
     showInfo();
 }
 
