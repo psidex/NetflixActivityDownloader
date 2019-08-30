@@ -13,7 +13,7 @@ Use of this software may constitute a breach in the [Netflix Terms of Use](https
 - Highlight and copy **ALL** the code below
 
  ```javascript
-javascript:let s=document.createElement("script");s.src="https://psidex.github.io/NetflixStats/minified/NetflixStats.min.js",s.type="application/javascript",document.getElementsByTagName("head")[0].appendChild(s);void 0
+javascript:let s=document.createElement("script");s.src="https://psidex.github.io/NetflixStats/NetflixStats.js",s.type="application/javascript",document.getElementsByTagName("head")[0].appendChild(s);void 0
 ```
 
 - Create a new bookmark in your browser, and where the URL goes, paste the code in
