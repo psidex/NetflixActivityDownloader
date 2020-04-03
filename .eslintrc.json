@@ -15,6 +15,7 @@
         "no-console": "off",
         "import/prefer-default-export": "off",
         "no-constant-condition": "off",
-        "no-await-in-loop": "off"
+        "no-await-in-loop": "off",
+        "import/extensions": "off"
     }
 }

@@ -1,5 +1,5 @@
-import { getVarsFromReact } from './variables';
-import { downloadActivity } from './api';
+import { getVarsFromReact } from './variables.js';
+import { downloadActivity } from './api.js';
 
 async function main() {
     const { shaktiActivityUrl, userInfo } = getVarsFromReact();
