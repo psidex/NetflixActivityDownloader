@@ -2,8 +2,6 @@
 
 A small script to extract and dispay information about your Netflix watch history
 
-![example](example.png)
-
 ## WARNING
 
 Use of this software may constitute a breach in the [Netflix Terms of Use](https://help.netflix.com/legal/termsofuse). Use at your own risk.
@@ -13,7 +11,7 @@ Use of this software may constitute a breach in the [Netflix Terms of Use](https
 - Highlight and copy **ALL** the code below
 
  ```javascript
-javascript:let s=document.createElement("script");s.src="https://psidex.github.io/NetflixStats/NetflixStats.js",s.type="application/javascript",document.getElementsByTagName("head")[0].appendChild(s);void 0
+javascript:s=document.createElement("script");s.src="https://psidex.github.io/NetflixStats/src/main.js";document.head.appendChild(s);void 0
 ```
 
 - Create a new bookmark in your browser, and where the URL goes, paste the code in

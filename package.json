@@ -1,0 +1,24 @@
+{
+  "name": "netflixstats",
+  "version": "1.0.0",
+  "description": "A small script to extract and dispay information about your Netflix watch history",
+  "main": "NetflixStats.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psidex/NetflixStats.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/psidex/NetflixStats/issues"
+  },
+  "homepage": "https://github.com/psidex/NetflixStats#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2"
+  }
+}
