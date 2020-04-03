@@ -5,7 +5,7 @@
  */
 export async function downloadActivity(shaktiHistoryURL) {
     let currentPage = 0;
-    const viewingHistory = [];
+    let viewingHistory = [];
 
     while (true) {
         console.log('Fetching activity page', currentPage);
@@ -20,7 +20,7 @@ export async function downloadActivity(shaktiHistoryURL) {
             break;
         }
 
-        viewingHistory.concat(data.viewedItems);
+        viewingHistory = viewingHistory.concat(data.viewedItems);
         currentPage += 1;
     }
 
