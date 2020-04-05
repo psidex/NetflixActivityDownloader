@@ -9,7 +9,7 @@ export async function downloadActivity() {
     let viewingHistory = [];
 
     while (true) {
-        console.log('Fetching activity page', currentPage);
+        console.log(`Fetching activity page ${currentPage}`);
 
         const response = await fetch(shaktiUrl + currentPage);
         if (!response.ok) {
