@@ -21,17 +21,21 @@ function onload2promise(targetElement) {
  */
 export async function loadChartist() {
     const cjs = document.createElement('script');
-    const jsLoadPromise = onload2promise(cjs);
+    const ccss = document.createElement('link');
+
     cjs.type = 'text/javascript';
     cjs.src = chartistJs;
-    document.head.appendChild(cjs);
-    await jsLoadPromise;
 
-    const ccss = document.createElement('link');
-    const cssLoadPromise = onload2promise(ccss);
     ccss.rel = 'stylesheet';
     ccss.type = 'text/css';
     ccss.href = chartistCss;
+
+    const jsLoadPromise = onload2promise(cjs);
+    const cssLoadPromise = onload2promise(ccss);
+
+    document.head.appendChild(cjs);
     document.head.appendChild(ccss);
+
+    await jsLoadPromise;
     await cssLoadPromise;
 }
