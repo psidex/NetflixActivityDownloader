@@ -1,16 +1,17 @@
+import { shaktiUrl } from './reactVariables.js';
+
 /**
- * Grab all the watch history.
- * @param shaktiHistoryURL - The API URL for activity.
- * @returns An array containing all objects of watched items.
+ * Get all the current users watch history.
+ * @returns {Array} An array containing all objects of watched items.
  */
-export async function downloadActivity(shaktiHistoryURL) {
+export async function downloadActivity() {
     let currentPage = 0;
     let viewingHistory = [];
 
     while (true) {
         console.log('Fetching activity page', currentPage);
 
-        const response = await fetch(shaktiHistoryURL + currentPage);
+        const response = await fetch(shaktiUrl + currentPage);
         if (!response.ok) {
             console.error('Fetching API failed:', response);
         }

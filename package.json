@@ -1,10 +1,12 @@
 {
   "name": "netflixstats",
   "version": "1.0.0",
-  "description": "A small script to extract and dispay information about your Netflix watch history",
+  "description": "A small script to extract and display information about your Netflix watch history ",
   "main": "NetflixStats.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "npx webpack",
+    "lint": "npx eslint ./src"
   },
   "repository": {
     "type": "git",
@@ -15,10 +17,18 @@
   "bugs": {
     "url": "https://github.com/psidex/NetflixStats/issues"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run webpack"
+    }
+  },
   "homepage": "https://github.com/psidex/NetflixStats#readme",
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "eslint-plugin-import": "^2.20.2",
+    "husky": "^4.2.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   }
 }

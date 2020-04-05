@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/node
 # Edit at https://www.gitignore.io/?templates=node
 
@@ -81,7 +80,7 @@ typings/
 .nuxt
 
 # rollup.js default build output
-dist/
+# dist/
 
 # Uncomment the public line if your project uses Gatsby
 # https://nextjs.org/blog/next-9-1#public-directory-support

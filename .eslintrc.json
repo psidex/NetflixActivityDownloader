@@ -6,6 +6,9 @@
     "extends": [
         "airbnb-base"
     ],
+    "plugins": [
+        "import"
+    ],
     "parserOptions": {
         "ecmaVersion": 2019,
         "sourceType": "module"
@@ -13,9 +16,9 @@
     "rules": {
         "indent": ["error", 4],
         "no-console": "off",
-        "import/prefer-default-export": "off",
         "no-constant-condition": "off",
         "no-await-in-loop": "off",
+        "import/prefer-default-export": "off",
         "import/extensions": "off"
     }
 }
