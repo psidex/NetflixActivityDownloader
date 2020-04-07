@@ -1,4 +1,5 @@
 import { shaktiUrl } from './reactVariables.js';
+import { d } from './utils.js';
 
 /**
  * Get all the current users watch history.
@@ -9,11 +10,11 @@ export async function downloadActivity() {
     let viewingHistory = [];
 
     while (true) {
-        console.log(`Fetching activity page ${currentPage}`);
+        d(`Fetching activity page ${currentPage}`);
 
         const response = await fetch(shaktiUrl + currentPage);
         if (!response.ok) {
-            console.error('Fetching API failed:', response);
+            d(`Fetching API failed: ${response}`);
         }
 
         const data = await response.json();

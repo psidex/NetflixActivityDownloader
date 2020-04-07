@@ -1,6 +1,6 @@
 {
   "name": "netflixstats",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "A small script to extract and display information about your Netflix watch history ",
   "main": "NetflixStats.js",
   "scripts": {
@@ -22,6 +22,7 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "html-loader": "^1.1.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   }

@@ -1,3 +1,6 @@
+import { d } from './utils.js';
+import popupHtml from './popup.html';
+
 const chartistCss = 'https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.css';
 const chartistJs = 'https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js';
 
@@ -20,8 +23,11 @@ function onload2promise(targetElement) {
  * Inserts chartist into document.head and waits for the CSS and JS files to load.
  */
 export async function loadChartist() {
-    const cjs = document.createElement('script');
-    const ccss = document.createElement('link');
+    const cjs = document.head.appendChild(document.createElement('script'));
+    const ccss = document.head.appendChild(document.createElement('link'));
+
+    const jsLoadPromise = onload2promise(cjs);
+    const cssLoadPromise = onload2promise(ccss);
 
     cjs.type = 'text/javascript';
     cjs.src = chartistJs;
@@ -30,12 +36,15 @@ export async function loadChartist() {
     ccss.type = 'text/css';
     ccss.href = chartistCss;
 
-    const jsLoadPromise = onload2promise(cjs);
-    const cssLoadPromise = onload2promise(ccss);
-
-    document.head.appendChild(cjs);
-    document.head.appendChild(ccss);
-
     await jsLoadPromise;
     await cssLoadPromise;
+
+    d('Chartist loaded');
+}
+
+export function createPopup() {
+    const div = document.body.appendChild(document.createElement('div'));
+    div.innerHTML = popupHtml;
+    div.style.cssText = 'position: absolute; background-color: white; z-index: 20;'
+        + 'transform: translate(-50%, -50%); left: 50%; top: 50%; padding: 1em;';
 }

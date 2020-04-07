@@ -1,10 +1,11 @@
-import { downloadActivity } from './api.js';
-import { downloadObjAsFile } from './utils.js';
+import { d } from './utils.js';
+import { createPopup } from './dom.js';
 
 async function main() {
-    console.log('Loaded');
-    const activity = await downloadActivity();
-    downloadObjAsFile(activity);
+    // eslint-disable-next-line no-undef
+    d(`Loaded v${VERSION}`);
+
+    createPopup();
 }
 
 main();
