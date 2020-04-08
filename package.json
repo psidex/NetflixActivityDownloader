@@ -1,8 +1,8 @@
 {
-  "name": "netflixstats",
-  "version": "0.0.2",
-  "description": "A small script to extract and display information about your Netflix watch history ",
-  "main": "NetflixStats.js",
+  "name": "netflixactivitydownloader",
+  "version": "0.0.3",
+  "description": "A small script to extract your Netflix activity to a JSON file",
+  "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx webpack",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/psidex/NetflixStats.git"
+    "url": "git+https://github.com/psidex/NetflixActivityDownloader.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/psidex/NetflixStats/issues"
+    "url": "https://github.com/psidex/NetflixActivityDownloader/issues"
   },
-  "homepage": "https://github.com/psidex/NetflixStats#readme",
+  "homepage": "https://github.com/psidex/NetflixActivityDownloader#readme",
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",

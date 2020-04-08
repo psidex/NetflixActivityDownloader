@@ -1,11 +1,17 @@
-import { d } from './utils.js';
-import { createPopup } from './dom.js';
+import { d, downloadObjAsFile } from './utils.js';
+import downloadActivity from './api.js';
+import popupHtml from './popup.html';
 
-async function main() {
-    // eslint-disable-next-line no-undef
-    d(`Loaded v${VERSION}`);
+// eslint-disable-next-line no-undef
+d(`Loaded v${VERSION}`);
 
-    createPopup();
-}
+const div = document.body.appendChild(document.createElement('div'));
+div.innerHTML = popupHtml;
 
-main();
+div.style.cssText = 'position: absolute; background-color: white; z-index: 20;'
+    + 'transform: translate(-50%, -50%); left: 50%; top: 50%; padding: 1em; border-style: solid;';
+
+div.querySelector('button').addEventListener('click', async () => {
+    const data = await downloadActivity();
+    downloadObjAsFile(data);
+});

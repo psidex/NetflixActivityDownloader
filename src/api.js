@@ -1,11 +1,21 @@
-import { shaktiUrl } from './reactVariables.js';
 import { d } from './utils.js';
+
+const {
+    userInfo: {
+        data: userInfo,
+    },
+    serverDefs: {
+        data: serverDefs,
+    },
+} = window.netflix.reactContext.models;
+
+const shaktiUrl = `${serverDefs.API_ROOT}/shakti/${serverDefs.BUILD_IDENTIFIER}/viewingactivity?authURL=${userInfo.authUrl}&pg=`;
 
 /**
  * Get all the current users watch history.
  * @returns {Array} An array containing all objects of watched items.
  */
-export async function downloadActivity() {
+export default async function downloadActivity() {
     let currentPage = 0;
     let viewingHistory = [];
 

@@ -6,7 +6,7 @@ module.exports = {
     mode: 'production',
     entry: './src/main.js',
     output: {
-        filename: 'netflixstats.js',
+        filename: 'nad.js',
         path: path.resolve(__dirname, 'dist'),
     },
     // https://webpack.js.org/plugins/define-plugin/

@@ -1,6 +1,6 @@
-# NetflixStats
+# NetflixActivityDownloader
 
-A small script to extract and display information about your Netflix watch history
+A small script to extract your Netflix activity to a JSON file
 
 ## WARNING
 
@@ -11,7 +11,7 @@ Use of this software may constitute a breach in the [Netflix Terms of Use](https
 - Highlight and copy **ALL** the code below
 
  ```javascript
-javascript:s=document.createElement('script');s.type='module';s.src='https://psidex.github.io/NetflixStats/dist/netflixstats.js';document.head.appendChild(s);void 0
+javascript:s=document.createElement('script');s.type='module';s.src='https://psidex.github.io/NetflixActivityDownloader/dist/nad.js';document.head.appendChild(s);void 0
 ```
 
 - Create a new bookmark in your browser, and where the URL goes, paste the code in
