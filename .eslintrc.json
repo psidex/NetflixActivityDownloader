@@ -1,24 +1,15 @@
 {
     "env": {
-        "browser": true,
-        "es6": true
+        "browser": true
     },
     "extends": [
-        "airbnb-base"
-    ],
-    "plugins": [
-        "import"
+        "airbnb"
     ],
     "parserOptions": {
-        "ecmaVersion": 2019,
         "sourceType": "module"
     },
     "rules": {
-        "indent": ["error", 4],
-        "no-console": "off",
         "no-constant-condition": "off",
-        "no-await-in-loop": "off",
-        "import/prefer-default-export": "off",
-        "import/extensions": "off"
+        "no-await-in-loop": "off"
     }
 }

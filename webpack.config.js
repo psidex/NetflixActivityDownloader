@@ -3,25 +3,29 @@ const path = require('path');
 const pkg = require('./package.json');
 
 module.exports = {
-    mode: 'production',
-    entry: './src/main.js',
-    output: {
-        filename: 'nad.js',
-        path: path.resolve(__dirname, 'dist'),
-    },
-    // https://webpack.js.org/plugins/define-plugin/
-    plugins: [
-        new webpack.DefinePlugin({
-            VERSION: JSON.stringify(pkg.version),
-        }),
+  mode: 'production',
+  entry: './src/main.js',
+  output: {
+    filename: 'n.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  // https://webpack.js.org/plugins/define-plugin/
+  plugins: [
+    new webpack.DefinePlugin({
+      VERSION: JSON.stringify(pkg.version),
+    }),
+  ],
+  // https://webpack.js.org/loaders/html-loader/
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
-    // https://webpack.js.org/loaders/html-loader/
-    module: {
-        rules: [
-            {
-                test: /\.html$/i,
-                loader: 'html-loader',
-            },
-        ],
-    },
+  },
 };

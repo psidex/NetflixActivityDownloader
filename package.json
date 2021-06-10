@@ -1,12 +1,11 @@
 {
   "name": "netflixactivitydownloader",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A small script to extract your Netflix activity to a JSON file",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx webpack",
-    "lint": "npx eslint ./src"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -19,11 +18,16 @@
   },
   "homepage": "https://github.com/psidex/NetflixActivityDownloader#readme",
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2",
-    "html-loader": "^1.1.0",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "css-loader": "^5.2.6",
+    "eslint": "7.2.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-react": "7.21.5",
+    "eslint-plugin-react-hooks": "1.7.0",
+    "html-loader": "^2.1.2",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2"
   }
 }

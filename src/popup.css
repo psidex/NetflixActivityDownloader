@@ -1,0 +1,10 @@
+#downloader {
+    position: absolute;
+    background-color: white;
+    z-index: 20;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    padding: 1em;
+    border-style: solid;
+}

@@ -4,20 +4,20 @@
  * @param {string} fileName The name of the file to be downloaded, defaults to data.json.
  */
 export function downloadObjAsFile(toSave, fileName = 'data.json') {
-    const hiddenElement = document.createElement('a');
+  const hiddenElement = document.createElement('a');
 
-    const blobUrl = URL.createObjectURL(new Blob(
-        [JSON.stringify(toSave, null, 2)],
-        { type: 'application/json' },
-    ));
+  const blobUrl = URL.createObjectURL(new Blob(
+    [JSON.stringify(toSave, null, 2)],
+    { type: 'application/json' },
+  ));
 
-    hiddenElement.href = blobUrl;
-    hiddenElement.download = fileName;
+  hiddenElement.href = blobUrl;
+  hiddenElement.download = fileName;
 
-    hiddenElement.click();
+  hiddenElement.click();
 
-    hiddenElement.remove();
-    URL.revokeObjectURL(blobUrl);
+  hiddenElement.remove();
+  URL.revokeObjectURL(blobUrl);
 }
 
 /**
@@ -25,5 +25,5 @@ export function downloadObjAsFile(toSave, fileName = 'data.json') {
  * @param {string} message
  */
 export function d(message) {
-    console.log(`[NetflixStats] ${message}`);
+  console.log(`[NetflixStats] ${message}`);
 }

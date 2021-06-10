@@ -1,17 +1,17 @@
-import { d, downloadObjAsFile } from './utils.js';
-import downloadActivity from './api.js';
+import { d, downloadObjAsFile } from './utils';
+import downloadActivity from './api';
 import popupHtml from './popup.html';
+import popupCss from './popup.css';
 
 // eslint-disable-next-line no-undef
 d(`Loaded v${VERSION}`);
 
 const div = document.body.appendChild(document.createElement('div'));
 div.innerHTML = popupHtml;
+div.id = 'downloader';
+div.style.cssText = popupCss.toString();
 
-div.style.cssText = 'position: absolute; background-color: white; z-index: 20;'
-    + 'transform: translate(-50%, -50%); left: 50%; top: 50%; padding: 1em; border-style: solid;';
-
-div.querySelector('button').addEventListener('click', async () => {
-    const data = await downloadActivity();
-    downloadObjAsFile(data);
+div.querySelector('#downloaderButton').addEventListener('click', async () => {
+  const data = await downloadActivity();
+  downloadObjAsFile(data);
 });
