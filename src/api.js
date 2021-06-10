@@ -17,6 +17,7 @@ const shaktiUrl = `${serverDefs.API_ROOT}/shakti/${serverDefs.BUILD_IDENTIFIER}/
  */
 export default async function downloadActivity() {
   let currentPage = 0;
+  let failed = 0;
   let viewingHistory = [];
 
   while (true) {
@@ -25,6 +26,11 @@ export default async function downloadActivity() {
     const response = await fetch(shaktiUrl + currentPage);
     if (!response.ok) {
       d(`Fetching API failed: ${response}`);
+      failed += 1;
+      if (failed >= 3) {
+        d('Failed to fetch from API 3 times, stopping');
+        break;
+      }
     }
 
     const data = await response.json();
